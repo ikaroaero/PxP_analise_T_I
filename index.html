@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portal de Pesquisa — Dinâmica Presa-Predador (PxP)</title>
+  <link rel="stylesheet" href="css/portal.css">
+</head>
+<body>
+
+  <!-- Gateway de Acesso Restrito (Login por Chave AES-256) -->
+  <div id="gatekeeper-overlay" class="gatekeeper-overlay">
+    <div class="gatekeeper-card">
+      <h2>🔒 Acesso Restrito ao Projeto</h2>
+      <p>Este portal armazena dados e análises científicas em andamento. Insira a frase-senha do projeto para decifrar os dados no seu navegador.</p>
+      <form id="form-login" class="form-senha">
+        <input type="password" id="input-chave" class="input-senha" placeholder="Digite a frase-senha do portal" autofocus required>
+        <button type="submit" class="btn-destaque">Desbloquear Portal</button>
+        <div id="msg-erro-login" class="msg-erro">Chave incorreta ou dados corrompidos. Verifique a senha digitada.</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cabeçalho Principal -->
+  <header>
+    <div class="header-topo">
+      <div>
+        <h1>Portal de Pesquisa — Dinâmica Presa-Predador (PxP)</h1>
+        <p>Acompanhamento de simulações, relatórios e análises entre aluno e orientadora</p>
+      </div>
+      <div class="header-acoes">
+        <button id="btn-logout" class="btn-lock" type="button" title="Bloquear acesso e limpar chave">🔒 Bloquear</button>
+      </div>
+    </div>
+    <nav class="nav-abas">
+      <button class="aba-btn ativa" data-aba="simulacoes">📊 Andamento das Simulações</button>
+      <button class="aba-btn" data-aba="relatorios">📑 Relatórios</button>
+      <button class="aba-btn" data-aba="resultados">🔬 Resultados</button>
+      <button class="aba-btn" data-aba="discussao">💬 Discussão</button>
+    </nav>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main>
+
+    <!-- 1. ABA: ANDAMENTO DAS SIMULAÇÕES -->
+    <section id="secao-simulacoes" class="secao-conteudo ativa">
+      <div id="painel-simulacoes-conteudo" class="painel-simulacoes">
+        <p style="color: #607080;">Aguardando desbloqueio do portal...</p>
+      </div>
+    </section>
+
+    <!-- 2. ABA: RELATÓRIOS -->
+    <section id="secao-relatorios" class="secao-conteudo">
+      <div class="layout-relatorios">
+        <aside class="indice-relatorios">
+          <h3>Relatórios Periódicos</h3>
+          <ul id="lista-relatorios" class="lista-relatorios">
+            <li style="color: #718096; padding: 10px;">Aguardando desbloqueio...</li>
+          </ul>
+        </aside>
+        <article class="visualizador-relatorio">
+          <div id="visualizador-relatorio-conteudo">
+            <p style="color: #607080;">Selecione um relatório ao lado para visualização.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. ABA: RESULTADOS (Estilo artigoNRK) -->
+    <section id="secao-resultados" class="secao-conteudo">
+      <div id="controles-resultados" class="controles">
+        <label>Conjunto
+          <select id="sel-conjunto"></select>
+        </label>
+        <label>Tipo de Análise
+          <select id="sel-tipo"></select>
+        </label>
+        <label>T (Escala Temporal)
+          <select id="sel-param-t"></select>
+        </label>
+        <label>I (Taxa de Invasão)
+          <select id="sel-param-i"></select>
+        </label>
+        <button id="btn-add-comparacao" type="button" class="btn-destaque">+ Adicionar à comparação</button>
+        <button id="btn-limpar-comparacao" type="button">Limpar comparação</button>
+      </div>
+      <section id="galeria-resultados" class="galeria">
+        <div class="vazio">Escolha os parâmetros nos seletores acima e clique em "+ Adicionar à comparação" para comparar as figuras lado a lado.</div>
+      </section>
+    </section>
+
+    <!-- 4. ABA: DISCUSSÃO -->
+    <section id="secao-discussao" class="secao-conteudo">
+      <div class="discussao-layout">
+        <div id="aviso-config-supabase" style="display:none; padding: 12px 16px; background: #fffaf0; border: 1px solid #feebc8; border-radius: 8px; color: #7b341e; font-size: 0.9rem;"></div>
+        <div id="mural-mensagens" class="mural-mensagens">
+          <div class="vazio">Carregando mural de discussões...</div>
+        </div>
+        <form id="form-discussao" class="form-nova-mensagem">
+          <div class="form-linha">
+            <label style="font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+              Autor:
+              <select id="discussao-autor" class="select-autor">
+                <option value="orientadora">Orientadora</option>
+                <option value="aluno">Aluno</option>
+              </select>
+            </label>
+          </div>
+          <textarea id="discussao-texto" class="textarea-msg" placeholder="Digite uma dúvida, orientação ou nota sobre as simulações..." required></textarea>
+          <div style="display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn-destaque">Enviar Mensagem</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Scripts Modulares -->
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/simulacoes.js"></script>
+  <script src="js/relatorios.js"></script>
+  <script src="js/resultados.js"></script>
+  <script src="js/discussao.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# ==============================================================================
+# SEGURANÇA: Conteúdo em texto claro NUNCA deve ir para o Git
+# ==============================================================================
+conteudo/
+
+# Arquivos e pastas do sistema / ambiente local
+.env
+*.local
+node_modules/
+.DS_Store
+Thumbs.db
